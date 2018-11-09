@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='msm',
-    version='0.0.1',
+    version='1.0.0',
     description='Maven settings manager',
     url='https://github.com/Gunmer/maven-setting-manager',
     author='Gunmer',
