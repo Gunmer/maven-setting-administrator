@@ -1,6 +1,6 @@
 import argparse
 
-from src.msm import use_action, list_action, add_action, delete_action
+from msm.action import add_action, delete_action, use_action, list_action
 
 
 def main():
