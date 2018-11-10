@@ -1,6 +1,6 @@
 import sqlite3
 
-from msm import log
+from msm.util import log
 
 
 def connect(sqlite_file):
@@ -28,6 +28,6 @@ def execute_query(cursor, sql):
     log.debug('Will execute query: {}'.format(sql))
     cursor.execute(sql)
     rows = cursor.fetchall()
-    print('Result of query: {}'.format(rows))
+    log.debug('Result of query: {}'.format(rows))
 
     return rows
