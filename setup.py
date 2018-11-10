@@ -9,7 +9,7 @@ setup(
     author_email='csosaur@gmail.com',
     license='MIT',
     zip_safe=False,
-    packages=['src.msm'],
+    packages=['msm', 'msm.action', 'msm.util'],
     scripts=['bin/msm'],
-    entry_points={'console_scripts': ['src=src.msn.command_line:main']}
+    entry_points={'console_scripts': ['src=msn.command_line:main']}
 )

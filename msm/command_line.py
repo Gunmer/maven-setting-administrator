@@ -16,8 +16,8 @@ def main():
 
     add_parser = subparsers.add_parser('add', help='Add a new setting')
     add_parser.set_defaults(func=add_action.execute)
-    add_parser.add_argument('-a', '--alias', help='Alias of setting', required=True)
-    add_parser.add_argument('-f', '--file', help='File name of setting', required=True)
+    add_parser.add_argument('alias', help='Alias of setting')
+    add_parser.add_argument('file', help='File name of setting')
 
     delete_parser = subparsers.add_parser('del', help='Delete a setting')
     delete_parser.set_defaults(func=delete_action.execute)
