@@ -3,25 +3,27 @@ from msm.util import db, log
 
 
 def init():
-    log.info('Create table')
+    log.debug('Create table')
     sqlite_file = config.database_path + config.database_name
     connection, cursor = db.connect(sqlite_file)
     create_table = 'CREATE TABLE settings (name TEXT, file TEXT, isSelected INTEGER);'
-    db.execute_statement(cursor, create_table)
+    cursor.execute(create_table)
+    connection.commit()
     db.close(connection, cursor)
 
 
 def create(alias, file):
-    log.info('Add new data: alias={A}, file={F}'.format(A=alias, F=file))
+    log.debug('Add new data: alias={A}, file={F}'.format(A=alias, F=file))
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
-    insert_data = 'INSERT INTO settings VALUES ({N}, {F}, {S});'.format(N=alias, F=file, S=0)
-    db.execute_statement(cur, insert_data)
+    insert_data = "INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);"
+    cur.execute(insert_data, (alias, file, 0))
+    conn.commit()
     db.close(conn, cur)
 
 
 def list_all():
-    log.info('Listing all data')
+    log.debug('Listing all data')
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
     select_all = 'SELECT * FROM settings;'
@@ -32,19 +34,20 @@ def list_all():
 
 
 def update(alias, file, is_selected):
-    log.info('Update data: alias={A}, file={F} with: isSelected={S}'.format(A=alias, F=file, S=is_selected))
+    log.debug('Update data: alias={A}, file={F} with: isSelected={S}'.format(A=alias, F=file, S=is_selected))
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
-    update_data = 'UPDATE settings SET is_selected = {S} WHERE name = {N} AND file = {F};'.format(N=alias, F=file,
-                                                                                                  S=is_selected)
-    db.execute_statement(cur, update_data)
+    update_data = 'UPDATE settings SET isSelected = ? WHERE name = ? AND file = ?;'
+    cur.execute(update_data, (is_selected, alias, file))
+    conn.commit()
     db.close(conn, cur)
 
 
 def delete(alias, file):
-    log.info('Delete data: alias={A}, file={F}'.format(A=alias, F=file))
+    log.debug('Delete data: alias={A}, file={F}'.format(A=alias, F=file))
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
-    delete_data = 'DELETE FROM settings WHERE name = {N} AND file = {F};'.format(N=alias, F=file)
-    db.execute_statement(cur, delete_data)
+    delete_data = 'DELETE FROM settings WHERE name = ? AND file = ?;'
+    cur.execute(delete_data, (alias, file))
+    conn.commit()
     db.close(conn, cur)

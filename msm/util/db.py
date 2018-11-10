@@ -20,7 +20,6 @@ def close(connection, cursor):
 def execute_statement(cursor, sql):
     log.debug('Will execute statement: {}'.format(sql))
     cursor.execute(sql)
-    cursor.commit()
     log.debug('Statement did executed')
 
 
