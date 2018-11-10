@@ -1,2 +1,5 @@
+from msm import repository
+
+
 def execute(args):
-    print('Executed delete action')
+    repository.delete(args.setting)

@@ -1,2 +1,5 @@
+from msm import repository
+
+
 def execute(args):
-    print('Executed add action')
+    repository.create(args.alias, args.file)
