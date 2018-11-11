@@ -4,7 +4,7 @@ setup(
     name='msa',
     version='1.0.0',
     description='Maven settings manager',
-    url='https://github.com/Gunmer/maven-setting-manager',
+    url='https://github.com/Gunmer/maven-setting-administrator.git',
     author='Gunmer',
     author_email='csosaur@gmail.com',
     license='MIT',
