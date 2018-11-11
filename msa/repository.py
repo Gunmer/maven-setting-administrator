@@ -1,5 +1,5 @@
-from msm import config
-from msm.util import db, log
+from msa import config
+from msa.util import db, log
 
 
 def init():

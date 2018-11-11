@@ -1,5 +1,5 @@
-from msm import repository
-from msm.util import log
+from msa import repository
+from msa.util import log
 
 
 def execute(args):

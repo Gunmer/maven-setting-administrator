@@ -1,6 +1,6 @@
 import datetime
 
-from msm import config
+from msa import config
 
 
 def debug(message):

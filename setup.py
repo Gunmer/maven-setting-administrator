@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='msm',
+    name='msa',
     version='1.0.0',
     description='Maven settings manager',
     url='https://github.com/Gunmer/maven-setting-manager',
@@ -9,7 +9,7 @@ setup(
     author_email='csosaur@gmail.com',
     license='MIT',
     zip_safe=False,
-    packages=['msm', 'msm.action', 'msm.util'],
-    scripts=['bin/msm'],
+    packages=['msa', 'msa.action', 'msa.util'],
+    scripts=['bin/msa'],
     entry_points={'console_scripts': ['src=msn.command_line:main']}
 )

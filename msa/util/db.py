@@ -1,6 +1,6 @@
 import sqlite3
 
-from msm.util import log
+from msa.util import log
 
 
 def connect(sqlite_file):
