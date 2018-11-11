@@ -1,10 +1,10 @@
 import argparse
 
-from msm.action import add_action, delete_action, use_action, list_action
+from msa.action import add_action, delete_action, use_action, list_action
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='msm', usage='msm [-h] action')
+    parser = argparse.ArgumentParser(prog='msa', usage='msa [-h] action')
     subparsers = parser.add_subparsers(title='actions', metavar='')
 
     use_parser = subparsers.add_parser('use', help='Select the setting to use')

@@ -1,4 +1,4 @@
-from msm import file_manager, repository
+from msa import file_manager, repository
 
 if file_manager.init():
     repository.init()
