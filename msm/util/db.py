@@ -15,18 +15,3 @@ def close(connection, cursor):
     log.debug('Close th connection to db')
     cursor.close()
     connection.close()
-
-
-def execute_statement(cursor, sql):
-    log.debug('Will execute statement: {}'.format(sql))
-    cursor.execute(sql)
-    log.debug('Statement did executed')
-
-
-def execute_query(cursor, sql):
-    log.debug('Will execute query: {}'.format(sql))
-    cursor.execute(sql)
-    rows = cursor.fetchall()
-    log.debug('Result of query: {}'.format(rows))
-
-    return rows

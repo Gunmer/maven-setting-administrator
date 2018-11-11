@@ -27,7 +27,9 @@ def list_all():
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
     select_all = 'SELECT * FROM settings;'
-    results = db.execute_query(cur, select_all)
+    cur.execute(select_all)
+    results = cur.fetchall()
+    log.debug('Data: {}'.format(results))
     db.close(conn, cur)
 
     return map(lambda data: (data[0], data[2]), results)
@@ -40,6 +42,7 @@ def find_selected():
     select_find_selected = 'SELECT * FROM settings WHERE isSelected = 1;'
     cur.execute(select_find_selected)
     data = cur.fetchone()
+    log.debug('Data: {}'.format(data))
     db.close(conn, cur)
 
     if data is None:
@@ -66,7 +69,3 @@ def delete(alias):
     cur.execute(delete_data, (alias,))
     conn.commit()
     db.close(conn, cur)
-
-
-if __name__ == '__main__':
-    delete('Evo')
