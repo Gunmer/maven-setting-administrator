@@ -4,8 +4,7 @@ from msm.util import db, log
 
 def init():
     log.debug('Create table')
-    sqlite_file = config.database_path + config.database_name
-    connection, cursor = db.connect(sqlite_file)
+    connection, cursor = db.connect(config.database_path)
     create_table = 'CREATE TABLE settings (name TEXT, file TEXT, isSelected INTEGER);'
     cursor.execute(create_table)
     connection.commit()
@@ -14,8 +13,7 @@ def init():
 
 def create(alias, file):
     log.debug('Add new data: alias={A}, file={F}'.format(A=alias, F=file))
-    sqlite_file = config.database_path + config.database_name
-    conn, cur = db.connect(sqlite_file)
+    conn, cur = db.connect(config.database_path)
     insert_data = "INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);"
     cur.execute(insert_data, (alias, file, 0))
     conn.commit()
@@ -24,8 +22,7 @@ def create(alias, file):
 
 def list_all():
     log.debug('Listing all data')
-    sqlite_file = config.database_path + config.database_name
-    conn, cur = db.connect(sqlite_file)
+    conn, cur = db.connect(config.database_path)
     select_all = 'SELECT * FROM settings;'
     cur.execute(select_all)
     results = cur.fetchall()
@@ -37,8 +34,7 @@ def list_all():
 
 def find_selected():
     log.debug('Find selected data')
-    sqlite_file = config.database_path + config.database_name
-    conn, cur = db.connect(sqlite_file)
+    conn, cur = db.connect(config.database_path)
     select_find_selected = 'SELECT * FROM settings WHERE isSelected = 1;'
     cur.execute(select_find_selected)
     data = cur.fetchone()
@@ -50,8 +46,7 @@ def find_selected():
 
 def find_one(alias):
     log.debug('Find selected data')
-    sqlite_file = config.database_path + config.database_name
-    conn, cur = db.connect(sqlite_file)
+    conn, cur = db.connect(config.database_path)
     select_find_selected = 'SELECT * FROM settings WHERE name = ?;'
     cur.execute(select_find_selected, (alias,))
     data = cur.fetchone()
@@ -63,8 +58,7 @@ def find_one(alias):
 
 def update(alias, is_selected):
     log.debug('Update data: alias={A} with: isSelected={S}'.format(A=alias, S=is_selected))
-    sqlite_file = config.database_path + config.database_name
-    conn, cur = db.connect(sqlite_file)
+    conn, cur = db.connect(config.database_path)
     update_data = 'UPDATE settings SET isSelected = ? WHERE name = ?;'
     cur.execute(update_data, (is_selected, alias))
     conn.commit()
@@ -73,8 +67,7 @@ def update(alias, is_selected):
 
 def delete(alias):
     log.debug('Delete data: alias={A}'.format(A=alias))
-    sqlite_file = config.database_path + config.database_name
-    conn, cur = db.connect(sqlite_file)
+    conn, cur = db.connect(config.database_path)
     delete_data = 'DELETE FROM settings WHERE name = ?;'
     cur.execute(delete_data, (alias,))
     conn.commit()

@@ -4,6 +4,6 @@ from msm.util import log
 
 def execute(args):
     log.set_config(args)
-    file = file_manager.add_setting(args.file)
+    file = file_manager.add_setting(args.alias, args.file)
     repository.create(args.alias, file)
     log.restore_config()
