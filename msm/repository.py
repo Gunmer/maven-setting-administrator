@@ -27,27 +27,45 @@ def list_all():
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
     select_all = 'SELECT * FROM settings;'
-    results = db.execute_query(cur, select_all)
+    cur.execute(select_all)
+    results = cur.fetchall()
+    log.debug('Data: {}'.format(results))
     db.close(conn, cur)
 
-    return map(lambda data: (data[0], data[1]), results)
+    return map(lambda data: (data[0], data[2]), results)
 
 
-def update(alias, file, is_selected):
-    log.debug('Update data: alias={A}, file={F} with: isSelected={S}'.format(A=alias, F=file, S=is_selected))
+def find_selected():
+    log.debug('Find selected data')
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
-    update_data = 'UPDATE settings SET isSelected = ? WHERE name = ? AND file = ?;'
-    cur.execute(update_data, (is_selected, alias, file))
+    select_find_selected = 'SELECT * FROM settings WHERE isSelected = 1;'
+    cur.execute(select_find_selected)
+    data = cur.fetchone()
+    log.debug('Data: {}'.format(data))
+    db.close(conn, cur)
+
+    if data is None:
+        return None, None
+
+    return data[0], data[1]
+
+
+def update(alias, is_selected):
+    log.debug('Update data: alias={A} with: isSelected={S}'.format(A=alias, S=is_selected))
+    sqlite_file = config.database_path + config.database_name
+    conn, cur = db.connect(sqlite_file)
+    update_data = 'UPDATE settings SET isSelected = ? WHERE name = ?;'
+    cur.execute(update_data, (is_selected, alias))
     conn.commit()
     db.close(conn, cur)
 
 
-def delete(alias, file):
-    log.debug('Delete data: alias={A}, file={F}'.format(A=alias, F=file))
+def delete(alias):
+    log.debug('Delete data: alias={A}'.format(A=alias))
     sqlite_file = config.database_path + config.database_name
     conn, cur = db.connect(sqlite_file)
-    delete_data = 'DELETE FROM settings WHERE name = ? AND file = ?;'
-    cur.execute(delete_data, (alias, file))
+    delete_data = 'DELETE FROM settings WHERE name = ?;'
+    cur.execute(delete_data, (alias,))
     conn.commit()
     db.close(conn, cur)
