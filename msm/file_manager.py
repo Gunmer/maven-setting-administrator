@@ -15,8 +15,8 @@ def init():
     return True
 
 
-def add_setting(file_path):
-    file_name = os.path.split(file_path)[1]
+def add_setting(alias, file_path):
+    file_name = alias + os.path.split(file_path)[1]
     dst_path = config.msm_path + file_name
 
     log.debug('Add {F} to {D}'.format(F=file_path, D=dst_path))
