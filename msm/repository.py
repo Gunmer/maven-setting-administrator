@@ -32,7 +32,7 @@ def list_all():
     log.debug('Data: {}'.format(results))
     db.close(conn, cur)
 
-    return map(lambda data: (data[0], data[2]), results)
+    return results
 
 
 def find_selected():
@@ -45,10 +45,20 @@ def find_selected():
     log.debug('Data: {}'.format(data))
     db.close(conn, cur)
 
-    if data is None:
-        return None, None
+    return data
 
-    return data[0], data[1]
+
+def find_one(alias):
+    log.debug('Find selected data')
+    sqlite_file = config.database_path + config.database_name
+    conn, cur = db.connect(sqlite_file)
+    select_find_selected = 'SELECT * FROM settings WHERE name = ?;'
+    cur.execute(select_find_selected, (alias,))
+    data = cur.fetchone()
+    log.debug('Data: {}'.format(data))
+    db.close(conn, cur)
+
+    return data
 
 
 def update(alias, is_selected):
