@@ -1,7 +1,6 @@
-from pathlib import Path
+from os.path import expanduser
 
-user_home_path = str(Path.home()) + '/'
-# user_home_path = '/tmp/'
+user_home_path = expanduser("~") + '/'
 m2_path = user_home_path + '.m2/'
 
 msa_path = m2_path + 'msa/'
