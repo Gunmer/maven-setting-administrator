@@ -4,11 +4,36 @@ Command line tool for manage several settings file
 
 ## Getting Started
 
-Coming soon...
-
 ### Installing
 
-Coming soon...
+You can install Maven Settings Manager (msa) with pip:
+```
+    pip install msa --user
+```
+
+> You can install pip [here](https://www.makeuseof.com/tag/install-pip-for-python/)
+
+Add to PATH:
+```
+    export PATH="/Users/cristiam/Library/Python/2.7/bin:$PATH"
+```
+
+### Using
+
+The most important commands are:
+
+- **add** To adding setting.
+```
+    msa add alias ~/Download/settings.xml
+```
+- **ls** To list settings
+```
+    msa ls
+```
+- **use** To select setting to used
+```
+    msa use alias
+```
 
 ## Contributing
 
