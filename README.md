@@ -5,7 +5,7 @@ Command line tool for manage several settings file
 ## Getting Started
 
 ### Installing
-
+#### With python 2
 You can install Maven Settings Manager (msa) with pip:
 ```
     pip install msa --user
@@ -13,9 +13,10 @@ You can install Maven Settings Manager (msa) with pip:
 
 > You can install pip [here](https://www.makeuseof.com/tag/install-pip-for-python/)
 
-Add to PATH:
+#### With python 3
+You can install Maven Settings Manager (msa) with pip:
 ```
-    export PATH="/Users/cristiam/Library/Python/2.7/bin:$PATH"
+    pip3 install msa --user
 ```
 
 ### Using
@@ -35,6 +36,27 @@ The most important commands are:
     msa use alias
 ```
 
+#### Using like python module
+```
+    python -m msa -h
+```
+#### Using like command
+Before add this to the $PATH:
+
+**Python2**
+```
+    export PATH="~/Library/Python/2.7/bin:$PATH"
+```
+**Python3**
+```
+    export PATH="~/Library/Python/3.7/bin:$PATH"
+```
+After in you terminal, yo can use:
+```
+    msa -h
+```
+> This is available only in bash terminal
+
 ## Contributing
 
 Coming soon...
@@ -45,7 +67,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Cristiam Sosa** - *Initial work* - [Gunmer](https://github.com/Gunmer)
+* **Cristiam Sosa** - *Author* - [Gunmer](https://github.com/Gunmer)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
