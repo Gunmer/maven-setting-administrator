@@ -10,7 +10,6 @@ def init():
         log.debug('Detected msa directory in {}'.format(config.m2_path))
         return False
 
-    print('Initialize msa')
     os.mkdir(config.msa_path)
     log.debug('Creating msa directory in {}'.format(config.m2_path))
     return True
