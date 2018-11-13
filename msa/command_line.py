@@ -1,11 +1,14 @@
 import argparse
 
+from msa import config
 from msa.action import add_action, delete_action, use_action, list_action
 
 
 def main():
     parser = argparse.ArgumentParser(prog='msa', usage='msa [-h] action')
     subparsers = parser.add_subparsers(title='actions', metavar='')
+
+    parser.add_argument('-v', '--version', help='Show version', action='store_true')
 
     use_parser = subparsers.add_parser('use', help='Select the setting to use')
     use_parser.set_defaults(func=use_action.execute)
@@ -28,4 +31,10 @@ def main():
     delete_parser.add_argument('-d', '--debug', action='store_true')
 
     args = parser.parse_args()
-    args.func(args)
+
+    if args.version:
+        print('msa version: {}'.format(config.msa_version))
+    elif hasattr(args, 'func'):
+        args.func(args)
+    else:
+        parser.print_help()
