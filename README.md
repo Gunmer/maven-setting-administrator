@@ -15,7 +15,7 @@ You can install Maven Settings Manager (msa) with pip:
 
 Add to PATH:
 ```
-    export PATH="/Users/cristiam/Library/Python/2.7/bin:$PATH"
+    export PATH="~/Library/Python/2.7/bin:$PATH"
 ```
 
 ### Using
