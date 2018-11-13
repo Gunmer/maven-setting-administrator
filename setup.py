@@ -1,8 +1,10 @@
 from setuptools import setup
 
+from msa import config
+
 setup(
     name='msa',
-    version='1.0.1',
+    version=config.msa_version,
     description='Maven settings administrator',
     url='https://github.com/Gunmer/maven-setting-administrator.git',
     author='Gunmer',
