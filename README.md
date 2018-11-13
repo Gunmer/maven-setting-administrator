@@ -5,8 +5,11 @@ Command line tool for manage several settings file
 ## Getting Started
 
 ### Installing
-#### With python 2
+
 You can install Maven Settings Manager (msa) with pip:
+
+#### With python 2
+
 ```
     pip install msa --user
 ```
@@ -14,7 +17,7 @@ You can install Maven Settings Manager (msa) with pip:
 > You can install pip [here](https://www.makeuseof.com/tag/install-pip-for-python/)
 
 #### With python 3
-You can install Maven Settings Manager (msa) with pip:
+
 ```
     pip3 install msa --user
 ```
