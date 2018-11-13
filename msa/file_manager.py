@@ -10,7 +10,6 @@ def init():
         log.debug('Detected msa directory in {}'.format(config.m2_path))
         return False
 
-    print('Initialize msa')
     os.mkdir(config.msa_path)
     log.debug('Creating msa directory in {}'.format(config.m2_path))
     return True
@@ -27,6 +26,9 @@ def add_setting(alias, file_path):
 
 
 def activate_setting(file):
+    if not str(file):
+        return
+
     src_path = config.msa_path + file
     dst_path = config.m2_path + 'settings.xml'
 
@@ -36,6 +38,8 @@ def activate_setting(file):
 
 def deactivate_setting(file):
     src_path = config.m2_path + 'settings.xml'
+    if not os.path.exists(src_path):
+        return
 
     log.debug('Deactivate {}'.format(file))
     os.remove(src_path)
