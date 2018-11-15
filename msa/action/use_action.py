@@ -5,20 +5,20 @@ from msa.util import log
 def execute(args):
     log.set_config(args)
 
-    selected_setting = repository.find_selected()
-    setting_to_use = repository.find_one(args.setting)
+    old_setting = repository.find_selected()
+    new_setting = repository.find_one(args.setting)
 
-    if setting_to_use is None:
+    if new_setting is None:
         print('Setting not found!!!')
         return
 
-    if selected_setting is not None:
-        selected_setting.selected = False
-        repository.update(selected_setting)
-        file_manager.deactivate_setting(selected_setting.file)
+    if old_setting is not None:
+        old_setting.deselect()
+        repository.update(old_setting)
+        file_manager.deactivate_setting(old_setting)
 
-    setting_to_use.selected = True
-    repository.update(setting_to_use)
-    file_manager.activate_setting(setting_to_use.file)
+    new_setting.select()
+    repository.update(new_setting)
+    file_manager.activate_setting(new_setting)
 
     log.restore_config()

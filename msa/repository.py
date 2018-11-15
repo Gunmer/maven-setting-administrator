@@ -30,7 +30,7 @@ def list_all():
     log.debug('Data: {}'.format(results))
     db.close(conn, cur)
 
-    return map(lambda result: Setting(result[0], result[1], bool(result[2])), results)
+    return map(lambda result: Setting(result[0], result[1], result[2]), results)
 
 
 def find_selected():
@@ -45,7 +45,7 @@ def find_selected():
     if data is None:
         return None
 
-    return Setting(data[0], data[1], bool(data[2]))
+    return Setting(data[0], data[1], data[2])
 
 
 def find_one(alias):
@@ -60,14 +60,14 @@ def find_one(alias):
     if data is None:
         return None
 
-    return Setting(data[0], data[1], bool(data[2]))
+    return Setting(data[0], data[1], data[2])
 
 
 def update(setting):
     log.debug('Update data: {}'.format(setting))
     conn, cur = db.connect(config.database_path)
     update_data = 'UPDATE settings SET isSelected = ? WHERE name = ?;'
-    cur.execute(update_data, (int(setting.selected), setting.alias))
+    cur.execute(update_data, (setting.selected, setting.alias))
     conn.commit()
     db.close(conn, cur)
 

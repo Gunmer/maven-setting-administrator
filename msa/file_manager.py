@@ -2,6 +2,7 @@ import os
 from shutil import copyfile
 
 from msa import config
+from msa.setting import Setting
 from msa.util import log
 
 
@@ -22,31 +23,31 @@ def add_setting(alias, file_path):
     log.debug('Add {F} to {D}'.format(F=file_path, D=dst_path))
     copyfile(file_path, dst_path)
 
-    return file_name
+    return Setting(alias, file_path)
 
 
-def activate_setting(file):
-    if not str(file):
+def activate_setting(setting):
+    if not str(setting.file):
         return
 
-    src_path = config.msa_path + file
+    src_path = config.msa_path + setting.file
     dst_path = config.m2_path + 'settings.xml'
 
-    log.debug('Activate {}'.format(file))
+    log.debug('Activate {}'.format(setting))
     copyfile(src_path, dst_path)
 
 
-def deactivate_setting(file):
+def deactivate_setting(setting):
     src_path = config.m2_path + 'settings.xml'
     if not os.path.exists(src_path):
         return
 
-    log.debug('Deactivate {}'.format(file))
+    log.debug('Deactivate {}'.format(setting))
     os.remove(src_path)
 
 
-def remove_setting(file):
-    setting_path = config.msa_path + file
+def remove_setting(setting):
+    setting_path = config.msa_path + setting.file
 
-    log.debug('Remove {}'.format(setting_path))
+    log.debug('Remove {}'.format(setting))
     os.remove(setting_path)

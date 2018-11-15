@@ -12,6 +12,6 @@ def execute(args):
         return
 
     repository.delete(setting)
-    file_manager.remove_setting(setting.file)
+    file_manager.remove_setting(setting)
 
     log.restore_config()
