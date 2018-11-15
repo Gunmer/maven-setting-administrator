@@ -47,6 +47,9 @@ def deactivate_setting(setting):
 
 
 def remove_setting(setting):
+    if not str(setting.file):
+        return
+
     setting_path = config.msa_path + setting.file
 
     log.debug('Remove {}'.format(setting))
