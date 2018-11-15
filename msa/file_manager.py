@@ -23,7 +23,7 @@ def add_setting(alias, file_path):
     log.debug('Add {F} to {D}'.format(F=file_path, D=dst_path))
     copyfile(file_path, dst_path)
 
-    return Setting(alias, file_path)
+    return Setting(alias, file_name)
 
 
 def activate_setting(setting):
