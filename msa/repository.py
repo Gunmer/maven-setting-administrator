@@ -1,4 +1,5 @@
 from msa import config
+from msa.setting import Setting
 from msa.util import db, log
 
 
@@ -11,11 +12,11 @@ def init():
     db.close(connection, cursor)
 
 
-def create(alias, file):
-    log.debug('Add new data: alias={A}, file={F}'.format(A=alias, F=file))
+def create(setting):
+    log.debug('Add new data: {}'.format(setting))
     conn, cur = db.connect(config.database_path)
-    insert_data = "INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);"
-    cur.execute(insert_data, (alias, file, 0))
+    insert_data = 'INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);'
+    cur.execute(insert_data, (setting.alias, setting.file, int(setting.selected)))
     conn.commit()
     db.close(conn, cur)
 
@@ -29,11 +30,11 @@ def list_all():
     log.debug('Data: {}'.format(results))
     db.close(conn, cur)
 
-    return results
+    return map(lambda result: Setting(result[0], result[1], bool(result[2])), results)
 
 
 def find_selected():
-    log.debug('Find selected data')
+    log.debug('Find selected')
     conn, cur = db.connect(config.database_path)
     select_find_selected = 'SELECT * FROM settings WHERE isSelected = 1;'
     cur.execute(select_find_selected)
@@ -41,11 +42,14 @@ def find_selected():
     log.debug('Data: {}'.format(data))
     db.close(conn, cur)
 
-    return data
+    if data is None:
+        return None
+
+    return Setting(data[0], data[1], bool(data[2]))
 
 
 def find_one(alias):
-    log.debug('Find selected data')
+    log.debug('Find one with alias {}'.format(alias))
     conn, cur = db.connect(config.database_path)
     select_find_selected = 'SELECT * FROM settings WHERE name = ?;'
     cur.execute(select_find_selected, (alias,))
@@ -53,22 +57,25 @@ def find_one(alias):
     log.debug('Data: {}'.format(data))
     db.close(conn, cur)
 
-    return data
+    if data is None:
+        return None
+
+    return Setting(data[0], data[1], bool(data[2]))
 
 
-def update(alias, is_selected):
-    log.debug('Update data: alias={A} with: isSelected={S}'.format(A=alias, S=is_selected))
+def update(setting):
+    log.debug('Update data: {}'.format(setting))
     conn, cur = db.connect(config.database_path)
     update_data = 'UPDATE settings SET isSelected = ? WHERE name = ?;'
-    cur.execute(update_data, (is_selected, alias))
+    cur.execute(update_data, (int(setting.selected), setting.alias))
     conn.commit()
     db.close(conn, cur)
 
 
-def delete(alias):
-    log.debug('Delete data: alias={A}'.format(A=alias))
+def delete(setting):
+    log.debug('Delete data: {}'.format(setting))
     conn, cur = db.connect(config.database_path)
     delete_data = 'DELETE FROM settings WHERE name = ?;'
-    cur.execute(delete_data, (alias,))
+    cur.execute(delete_data, (setting.alias,))
     conn.commit()
     db.close(conn, cur)

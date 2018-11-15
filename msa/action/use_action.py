@@ -13,10 +13,12 @@ def execute(args):
         return
 
     if selected_setting is not None:
-        repository.update(selected_setting[0], 0)
-        file_manager.deactivate_setting(selected_setting[1])
+        selected_setting.selected = False
+        repository.update(selected_setting)
+        file_manager.deactivate_setting(selected_setting.file)
 
-    repository.update(setting_to_use[0], 1)
-    file_manager.activate_setting(setting_to_use[1])
+    setting_to_use.selected = True
+    repository.update(setting_to_use)
+    file_manager.activate_setting(setting_to_use.file)
 
     log.restore_config()
