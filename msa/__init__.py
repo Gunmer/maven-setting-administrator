@@ -1,6 +1,6 @@
 from msa import file_manager
+from msa.repository.setting_repository import SettingRepository
 from msa.setting import Setting
-from msa.setting_repository import SettingRepository
 
 repository = SettingRepository()
 

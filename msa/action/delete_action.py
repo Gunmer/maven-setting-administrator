@@ -1,5 +1,5 @@
 from msa import file_manager
-from msa.setting_repository import SettingRepository
+from msa.repository.setting_repository import SettingRepository
 from msa.util import log
 
 
