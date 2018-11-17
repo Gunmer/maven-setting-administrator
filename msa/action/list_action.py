@@ -1,10 +1,7 @@
 from msa.repository.setting_repository import SettingRepository
-from msa.util import log
 
 
 def execute(args):
-    log.set_config(args)
-
     repository = SettingRepository()
 
     for setting in repository.list_all():
@@ -14,4 +11,3 @@ def execute(args):
 
         print(output)
 
-    log.restore_config()

@@ -2,6 +2,10 @@ import argparse
 
 from msa import config
 from msa.action import add_action, delete_action, use_action, list_action
+from msa.file_manager import FileManager
+from msa.repository.setting_repository import SettingRepository
+from msa.setting import Setting
+from msa.util.log import Log
 
 
 def main():
@@ -32,9 +36,27 @@ def main():
 
     args = parser.parse_args()
 
+    _initialize(args)
+
     if args.version:
         print('msa version: {}'.format(config.msa_version))
     elif hasattr(args, 'func'):
         args.func(args)
     else:
         parser.print_help()
+
+
+def _initialize(arg):
+    log = Log(arg)
+    repository = SettingRepository()
+    file_manager = FileManager(log)
+
+    if not file_manager.directory_exist():
+        print('... Creating directory ...')
+        file_manager.create_directory()
+        print('... Creating database ...')
+        repository.create_settings_table()
+
+    if repository.find_one('default') is None:
+        print('... Adding default settings ...')
+        repository.create(Setting('default', ''))

@@ -3,54 +3,55 @@ from shutil import copyfile
 
 from msa import config
 from msa.setting import Setting
-from msa.util import log
 
 
-def init():
-    if os.path.exists(config.msa_path):
-        log.debug('Detected msa directory in {}'.format(config.m2_path))
-        return False
+class FileManager(object):
 
-    os.mkdir(config.msa_path)
-    log.debug('Creating msa directory in {}'.format(config.m2_path))
-    return True
+    def __init__(self, logger):
+        self.log = logger
 
+    def directory_exist(self):
+        exist = os.path.exists(config.msa_path)
+        self.log.debug('Detected msa directory: {}'.format(exist))
+        return exist
 
-def add_setting(alias, file_path):
-    file_name = alias + os.path.split(file_path)[1]
-    dst_path = config.msa_path + file_name
+    def create_directory(self):
+        self.log.debug('Creating msa directory in {}'.format(config.m2_path))
+        os.mkdir(config.msa_path)
 
-    log.debug('Add {F} to {D}'.format(F=file_path, D=dst_path))
-    copyfile(file_path, dst_path)
+    def create_setting(self, alias, file_path):
 
-    return Setting(alias, file_name)
+        file_name = alias + os.path.split(file_path)[1]
+        dst_path = config.msa_path + file_name
 
+        self.log.debug('Create {F} to {D}'.format(F=file_path, D=dst_path))
+        copyfile(file_path, dst_path)
 
-def activate_setting(setting):
-    if not str(setting.file):
-        return
+        return Setting(alias, file_name)
 
-    src_path = config.msa_path + setting.file
-    dst_path = config.m2_path + 'settings.xml'
+    def activate_setting(self, setting):
+        if not str(setting.file):
+            return
 
-    log.debug('Activate {}'.format(setting))
-    copyfile(src_path, dst_path)
+        src_path = config.msa_path + setting.file
+        dst_path = config.m2_path + 'settings.xml'
 
+        self.log.debug('Activate {}'.format(setting))
+        copyfile(src_path, dst_path)
 
-def deactivate_setting(setting):
-    src_path = config.m2_path + 'settings.xml'
-    if not os.path.exists(src_path):
-        return
+    def deactivate_setting(self, setting):
+        src_path = config.m2_path + 'settings.xml'
+        if not os.path.exists(src_path):
+            return
 
-    log.debug('Deactivate {}'.format(setting))
-    os.remove(src_path)
+        self.log.debug('Deactivate {}'.format(setting))
+        os.remove(src_path)
 
+    def remove_setting(self, setting):
+        if not str(setting.file):
+            return
 
-def remove_setting(setting):
-    if not str(setting.file):
-        return
+        setting_path = config.msa_path + setting.file
 
-    setting_path = config.msa_path + setting.file
-
-    log.debug('Remove {}'.format(setting))
-    os.remove(setting_path)
+        self.log.debug('Remove {}'.format(setting))
+        os.remove(setting_path)

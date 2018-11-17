@@ -1,12 +1,13 @@
-from msa import file_manager
+from msa.file_manager import FileManager
 from msa.repository.setting_repository import SettingRepository
-from msa.util import log
+from msa.util.log import Log
 
 
 def execute(args):
-    log.set_config(args)
+    log = Log(args)
 
     repository = SettingRepository()
+    file_manager = FileManager(log)
 
     setting = repository.find_one(args.setting)
 
@@ -16,5 +17,3 @@ def execute(args):
 
     repository.delete(setting)
     file_manager.remove_setting(setting)
-
-    log.restore_config()
