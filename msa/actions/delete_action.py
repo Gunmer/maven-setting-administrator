@@ -1,16 +1,29 @@
 from msa.repositories.setting_repository import SettingRepository
-from msa.services.file_service import FileManager
+from msa.services.file_service import FileService
 
 
 def execute(args):
-    repository = SettingRepository(logger=args.log, config=args.config)
-    file_manager = FileManager(logger=args.log, config=args.config)
+    action = DeleteAction(logger=args.log, config=args.config)
+    action.execute(args.setting)
 
-    setting = repository.find_one(args.setting)
 
-    if setting is None:
-        print('Setting not found!!!')
-        return
+class DeleteAction(object):
 
-    repository.delete(setting)
-    file_manager.remove_setting(setting)
+    def __init__(self, logger, config):
+        self.setting_repository = SettingRepository(logger=logger, config=config)
+        self.file_service = FileService(logger=logger, config=config)
+
+    def execute(self, alias):
+        setting = self.setting_repository.find_one_by(alias)
+
+        if setting is None:
+            self._print_output('Setting not found!!!')
+            return
+
+        self.setting_repository.delete(setting)
+        self.file_service.remove_setting(setting)
+        self._print_output('The {} setting was deleted'.format(setting.alias))
+
+    # noinspection PyMethodMayBeStatic
+    def _print_output(self, message):
+        print(message)

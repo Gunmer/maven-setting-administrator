@@ -1,23 +1,37 @@
 from msa.repositories.setting_repository import SettingRepository
-from msa.services.file_service import FileManager
+from msa.services.file_service import FileService
 
 
 def execute(args):
-    repository = SettingRepository(logger=args.log, config=args.config)
-    file_manager = FileManager(logger=args.log, config=args.config)
+    action = UseAction(logger=args.log, config=args.config)
+    action.execute(args.setting)
 
-    old_setting = repository.find_selected()
-    new_setting = repository.find_one(args.setting)
 
-    if new_setting is None:
-        print('Setting not found!!!')
-        return
+class UseAction(object):
 
-    if old_setting is not None:
-        old_setting.deselect()
-        repository.update(old_setting)
-        file_manager.deactivate_setting(old_setting)
+    def __init__(self, logger, config):
+        self.setting_repository = SettingRepository(logger=logger, config=config)
+        self.file_service = FileService(logger=logger, config=config)
 
-    new_setting.select()
-    repository.update(new_setting)
-    file_manager.activate_setting(new_setting)
+    def execute(self, alias):
+        old_setting = self.setting_repository.find_selected()
+        new_setting = self.setting_repository.find_one_by(alias)
+
+        if new_setting is None:
+            self._print_output('Setting not found!!!')
+            return
+
+        if old_setting is not None:
+            old_setting.deselect()
+            self.setting_repository.update(old_setting)
+            self.file_service.deactivate_setting(old_setting)
+
+        new_setting.select()
+        self.setting_repository.update(new_setting)
+        self.file_service.activate_setting(new_setting)
+
+        self._print_output('The {} setting is selected'.format(new_setting.alias))
+
+    # noinspection PyMethodMayBeStatic
+    def _print_output(self, message):
+        print(message)

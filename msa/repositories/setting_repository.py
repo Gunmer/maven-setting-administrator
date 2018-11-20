@@ -51,7 +51,7 @@ class SettingRepository(object):
 
         return self._map_data_to_setting(data)
 
-    def find_one(self, alias):
+    def find_one_by(self, alias):
         cursor = self.connection.cursor()
         select_find_one = 'SELECT * FROM settings WHERE name = ?;'
         self.log.debug('Execute {Q} with {P}'.format(Q=select_find_one, P=alias))

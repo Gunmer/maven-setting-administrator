@@ -3,7 +3,7 @@ import argparse
 from msa.actions import add_action, delete_action, use_action, list_action
 from msa.model.setting import Setting
 from msa.repositories.setting_repository import SettingRepository
-from msa.services.file_service import FileManager
+from msa.services.file_service import FileService
 from msa.utils.config import Config
 from msa.utils.log import Log
 
@@ -51,7 +51,7 @@ def main():
 
 def _initialize(args):
     repository = SettingRepository(logger=args.log, config=args.config)
-    file_manager = FileManager(logger=args.log, config=args.config)
+    file_manager = FileService(logger=args.log, config=args.config)
 
     if not file_manager.directory_exist():
         print('... Creating directory ...')
@@ -59,6 +59,6 @@ def _initialize(args):
         print('... Creating database ...')
         repository.create_settings_table()
 
-    if repository.find_one('default') is None:
+    if repository.find_one_by('default') is None:
         print('... Adding default settings ...')
         repository.create(Setting('default', ''))

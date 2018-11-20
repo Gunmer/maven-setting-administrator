@@ -4,7 +4,7 @@ from shutil import copyfile
 from msa.model.setting import Setting
 
 
-class FileManager(object):
+class FileService(object):
 
     def __init__(self, logger, config):
         self.config = config
