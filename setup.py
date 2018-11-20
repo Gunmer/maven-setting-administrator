@@ -1,6 +1,6 @@
 from setuptools import setup
 
-from msa import config
+from msa.util import config
 
 setup(
     name='msa',

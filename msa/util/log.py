@@ -3,8 +3,8 @@ import datetime
 
 class Log(object):
 
-    def __init__(self, args):
-        self.is_enable = args.debug
+    def __init__(self, is_enable):
+        self.is_enable = is_enable
 
     def debug(self, message):
         if self.is_enable:

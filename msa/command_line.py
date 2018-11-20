@@ -1,10 +1,10 @@
 import argparse
 
-from msa import config
 from msa.action import add_action, delete_action, use_action, list_action
 from msa.file_manager import FileManager
 from msa.repository.setting_repository import SettingRepository
 from msa.setting import Setting
+from msa.util.config import Config
 from msa.util.log import Log
 
 
@@ -13,6 +13,7 @@ def main():
     subparsers = parser.add_subparsers(title='actions', metavar='')
 
     parser.add_argument('-v', '--version', help='Show version', action='store_true')
+    parser.add_argument('-d', '--debug', action='store_true')
 
     use_parser = subparsers.add_parser('use', help='Select the setting to use')
     use_parser.set_defaults(func=use_action.execute)
@@ -35,21 +36,22 @@ def main():
     delete_parser.add_argument('-d', '--debug', action='store_true')
 
     args = parser.parse_args()
+    args.config = Config()
+    args.log = Log(args.debug)
 
     _initialize(args)
 
     if args.version:
-        print('msa version: {}'.format(config.msa_version))
+        print('msa version: {}'.format(Config.version))
     elif hasattr(args, 'func'):
         args.func(args)
     else:
         parser.print_help()
 
 
-def _initialize(arg):
-    log = Log(arg)
-    repository = SettingRepository()
-    file_manager = FileManager(log)
+def _initialize(args):
+    repository = SettingRepository(logger=args.log, config=args.config)
+    file_manager = FileManager(logger=args.log, config=args.config)
 
     if not file_manager.directory_exist():
         print('... Creating directory ...')
