@@ -1,5 +1,5 @@
-from msa.file_manager import FileManager
 from msa.repositories.setting_repository import SettingRepository
+from msa.services.file_service import FileManager
 
 
 def execute(args):

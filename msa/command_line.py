@@ -1,9 +1,9 @@
 import argparse
 
 from msa.actions import add_action, delete_action, use_action, list_action
-from msa.file_manager import FileManager
 from msa.model.setting import Setting
 from msa.repositories.setting_repository import SettingRepository
+from msa.services.file_service import FileManager
 from msa.utils.config import Config
 from msa.utils.log import Log
 
