@@ -1,4 +1,4 @@
-from msa.repository.setting_repository import SettingRepository
+from msa.repositories.setting_repository import SettingRepository
 
 
 def execute(args):

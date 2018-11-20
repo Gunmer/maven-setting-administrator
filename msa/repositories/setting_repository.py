@@ -1,6 +1,6 @@
 import sqlite3
 
-from msa.setting import Setting
+from msa.model.setting import Setting
 
 
 class SettingRepository(object):

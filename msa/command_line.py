@@ -1,15 +1,15 @@
 import argparse
 
-from msa.action import add_action, delete_action, use_action, list_action
+from msa.actions import add_action, delete_action, use_action, list_action
 from msa.file_manager import FileManager
-from msa.repository.setting_repository import SettingRepository
-from msa.setting import Setting
-from msa.util.config import Config
-from msa.util.log import Log
+from msa.model.setting import Setting
+from msa.repositories.setting_repository import SettingRepository
+from msa.utils.config import Config
+from msa.utils.log import Log
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='msa', usage='msa [-h] action')
+    parser = argparse.ArgumentParser(prog='msa', usage='msa [-h] actions')
     subparsers = parser.add_subparsers(title='actions', metavar='')
 
     parser.add_argument('-v', '--version', help='Show version', action='store_true')

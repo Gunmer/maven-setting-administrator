@@ -1,7 +1,7 @@
 import os
 from shutil import copyfile
 
-from msa.setting import Setting
+from msa.model.setting import Setting
 
 
 class FileManager(object):
