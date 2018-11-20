@@ -1,6 +1,6 @@
 from setuptools import setup
 
-from msa import config
+from msa.utils import config
 
 setup(
     name='msa',
@@ -11,7 +11,7 @@ setup(
     author_email='csosaur@gmail.com',
     license='MIT',
     zip_safe=False,
-    packages=['msa', 'msa.action', 'msa.util'],
+    packages=['msa', 'msa.actions', 'msa.utils'],
     scripts=['bin/msa'],
     entry_points={'console_scripts': ['src=msn.command_line:main']}
 )
