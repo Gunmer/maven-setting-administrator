@@ -2,7 +2,7 @@ from os.path import expanduser
 
 
 class Config(object):
-    version = '1.0.2'
+    version = '1.1.0'
 
     def __init__(self):
         self.user_home_path = expanduser("~") + '/'

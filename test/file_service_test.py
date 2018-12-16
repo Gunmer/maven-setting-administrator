@@ -61,19 +61,17 @@ class FileServiceTest(unittest.TestCase):
     @patch('os.path.exists')
     @patch('os.remove')
     def test_deactivate_setting__when_setting_not_exists__should_not_call_remove(self, mock_remove, mock_exists):
-        setting = Setting('alias', 'file')
         mock_exists.return_value = False
 
-        self.service.deactivate_setting(setting)
+        self.service.deactivate_setting()
 
         mock_remove.assert_not_called()
 
     @patch('os.path.exists')
     @patch('os.remove')
     def test_deactivate_setting__when_setting_exists__should_call_remove(self, mock_remove, mock_exists):
-        setting = Setting('alias', 'file')
         mock_exists.return_value = True
 
-        self.service.deactivate_setting(setting)
+        self.service.deactivate_setting()
 
         mock_remove.assert_called()
