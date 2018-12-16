@@ -20,8 +20,8 @@ class SettingRepository(object):
     def create(self, setting):
         cursor = self.connection.cursor()
         insert_data = 'INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);'
-        self.log.debug('Map {D} to {S}'.format(D=insert_data, S=(setting.alias, setting.file, int(setting.selected))))
-        cursor.execute(insert_data, (setting.alias, setting.file, int(setting.selected)))
+        self.log.debug('Map {D} to {S}'.format(D=insert_data, S=(setting.alias, setting.file, setting.selected)))
+        cursor.execute(insert_data, (setting.alias, setting.file, setting.selected))
         self.connection.commit()
 
     def list_all(self):

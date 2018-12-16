@@ -22,7 +22,7 @@ class FileService(object):
     def create_setting(self, alias, file_path):
         self.log.debug('Create with alias: {A} from {P}'.format(A=alias, P=file_path))
 
-        file_name = alias + os.path.split(file_path)[1]
+        file_name = alias + '.xml'
         dst_path = self.config.msa_path + file_name
 
         self.log.debug('Copy {F} to {D}'.format(F=file_path, D=dst_path))
@@ -62,3 +62,10 @@ class FileService(object):
 
         self.log.debug('Delete {S}'.format(S=setting_path))
         os.remove(setting_path)
+
+    def list_all(self):
+        all_settings = [setting for setting in os.listdir(self.config.msa_path) if setting != self.config.database_name]
+
+        self.log.debug('Return all setting: {}'.format(all_settings))
+
+        return all_settings
