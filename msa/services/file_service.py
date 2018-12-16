@@ -42,10 +42,9 @@ class FileService(object):
         self.log.debug('Copy {S} to {D}'.format(S=src_path, D=dst_path))
         copyfile(src_path, dst_path)
 
-    def deactivate_setting(self, setting):
-        self.log.debug('Deactivate {}'.format(setting))
-
+    def deactivate_setting(self):
         src_path = self.config.m2_settings_path
+        self.log.debug('Deactivate {}'.format(src_path))
         if not os.path.exists(src_path):
             return
 

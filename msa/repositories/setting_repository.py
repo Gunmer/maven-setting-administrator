@@ -17,6 +17,13 @@ class SettingRepository(object):
         cursor.execute(create_table)
         self.connection.commit()
 
+    def clear_setting_table(self):
+        cursor = self.connection.cursor()
+        delete_table = 'DELETE FROM settings;'
+        self.log.debug('Execute {}'.format(delete_table))
+        cursor.execute(delete_table)
+        self.connection.commit()
+
     def create(self, setting):
         cursor = self.connection.cursor()
         insert_data = 'INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);'

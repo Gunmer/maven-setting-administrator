@@ -37,7 +37,7 @@ def main():
 
     doctor_parser = subparsers.add_parser('doctor', help='Tool for diagnostic and fix some issues')
     doctor_parser.set_defaults(func=doctor_action.execute)
-    doctor_parser.add_argument('-f', '--fix', action='store_true')
+    doctor_parser.add_argument('-f', '--fix', help='Fix some issues', action='store_true')
 
     args = parser.parse_args()
     args.config = Config()
