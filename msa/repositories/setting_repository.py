@@ -17,11 +17,18 @@ class SettingRepository(object):
         cursor.execute(create_table)
         self.connection.commit()
 
+    def clear_setting_table(self):
+        cursor = self.connection.cursor()
+        delete_table = 'DELETE FROM settings;'
+        self.log.debug('Execute {}'.format(delete_table))
+        cursor.execute(delete_table)
+        self.connection.commit()
+
     def create(self, setting):
         cursor = self.connection.cursor()
         insert_data = 'INSERT INTO settings (name, file, isSelected) VALUES (?, ?, ?);'
-        self.log.debug('Map {D} to {S}'.format(D=insert_data, S=(setting.alias, setting.file, int(setting.selected))))
-        cursor.execute(insert_data, (setting.alias, setting.file, int(setting.selected)))
+        self.log.debug('Map {D} to {S}'.format(D=insert_data, S=(setting.alias, setting.file, setting.selected)))
+        cursor.execute(insert_data, (setting.alias, setting.file, setting.selected))
         self.connection.commit()
 
     def list_all(self):

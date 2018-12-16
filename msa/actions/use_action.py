@@ -24,7 +24,7 @@ class UseAction(object):
         if old_setting is not None:
             old_setting.deselect()
             self.setting_repository.update(old_setting)
-            self.file_service.deactivate_setting(old_setting)
+            self.file_service.deactivate_setting()
 
         new_setting.select()
         self.setting_repository.update(new_setting)
