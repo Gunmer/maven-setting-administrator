@@ -16,9 +16,13 @@ setup(
     entry_points={'console_scripts': ['src=msn.command_line:main']},
     test_suite='test',
     classifiers=[
+        'Environment :: Console',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Software Development',
+        'Topic :: Utilities',
         'License :: OSI Approved :: MIT License',
     ],
 )

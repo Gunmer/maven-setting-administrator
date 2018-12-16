@@ -1,4 +1,9 @@
 # Maven settings manager
+[![Build Status](https://travis-ci.org/Gunmer/maven-setting-administrator.svg?branch=master)](https://travis-ci.org/Gunmer/maven-setting-administrator)
+![](https://img.shields.io/pypi/status/msa.svg)
+![](https://img.shields.io/pypi/v/msa.svg)
+![](https://img.shields.io/pypi/pyversions/msa.svg)
+![](https://img.shields.io/pypi/l/msa.svg)
 
 Command line tool for manage several settings file
 
