@@ -39,6 +39,18 @@ The most important commands are:
     msa use alias
 ```
 
+The others commands are:
+
+- **version** To know the msa version
+```
+   msa --version 
+```
+
+- **fix** To clear and fill database with settings added in msa directory
+```
+    msa doctor --fix
+```
+
 #### Using like python module
 ```
     python -m msa -h
@@ -62,17 +74,35 @@ After in you terminal, yo can use:
 
 ## Contributing
 
-Coming soon...
+To contributing with this project follow the next steps:
+    
+1. Folk the project
+1. Create a branch
+1. Add changes and committed
+1. Send a pull request
+
+For other suggestions send an email to *csosaur@gmail.com*
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Gunmer/maven-setting-administrator/tags). 
+
+## Changelog
+
+- **1.0.0**
+  - Initial version
+  - Add basics command: add, ls, use
+- **1.0.1**
+  - Fix some issue
+  - Add version command
+- **1.1.0**
+  - Add fix command
 
 ## Authors
 
 * **Cristiam Sosa** - *Author* - [Gunmer](https://github.com/Gunmer)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Gunmer/maven-setting-administrator/contributors) who participated in this project.
 
 ## License
 
