@@ -102,6 +102,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
   - Add version command
 - **1.1.0**
   - Add fix command
+- **1.1.1**
+  - Update pypi info
 
 ## Authors
 
