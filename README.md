@@ -81,7 +81,7 @@ After in you terminal, yo can use:
 
 To contributing with this project follow the next steps:
     
-1. Folk the project
+1. Fork the project
 1. Create a branch
 1. Add changes and committed
 1. Send a pull request
